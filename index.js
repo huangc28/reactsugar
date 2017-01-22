@@ -13,7 +13,7 @@
  * @TODOs
  *  - Extract file data to config file.
  *  - Refactor - done.
- *  - If directory already exists at the destinated folder / file. remove them first.
+ *  - If directory already exists at the destinated folder / file. remove them first - done.
  */
 
 const program = require('commander')
@@ -95,7 +95,7 @@ program
     //  1. package.json
     //  2. [name].jsx
     //  3. [name]Styles.css
-    const targetPath = `${CURRENT_PATH}/${name}`
+    const targetPath = resolve(CURRENT_PATH, name)
 
     exists(targetPath, exists => {
       // if path exists, create files straight ahead
