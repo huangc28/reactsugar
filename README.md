@@ -3,7 +3,7 @@ Creates the boilerplates for react component stacks
 
 ## Compatible
 
-nodejs version > 6.2.*
+nodejs version >= 6.2.*
 
 ## Purpose
 
