@@ -13,6 +13,7 @@ Rather than manually creating three files each time we want to write a react com
 2. [name].jsx
 3. [name]Styles.css
 
+> the first letter of name is capitalized 
 
 ## Install
 
