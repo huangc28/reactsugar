@@ -25,5 +25,5 @@ Rather than manually creating three files each time we want to write a react com
 
 ### Pure function component
 
-`reactsuger -p home` ---> does the same as the above, just that the component is now is pure function.
+`reactsuger -p home` ---> does the same as the above, just that the component is now in pure function.
 
