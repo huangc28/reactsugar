@@ -87,6 +87,7 @@ let pureCmdValue
 
 program
   .arguments('<name>')
+  .version('1.0.0')
   .option('-n, --name <name>', 'Name of the react component.')
   .option('-p, --pure [pure]', 'Should component be a pure function or extends react component, default to extend default component.')
   .action((name, pure) => { // @TODO should set a defualt argument for path
