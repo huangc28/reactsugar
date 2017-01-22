@@ -1,0 +1,16 @@
+{
+  "name": "react-suger",
+  "version": "1.0.0",
+  "description": "Create boilerplates for react component stacks.",
+  "bin": {
+    "reactsuger": "./index.js"
+  },
+  "main": "index.js",
+  "author": "Bryan Huang <huangchiheng@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "remove": "^0.1.5"
+  }
+}

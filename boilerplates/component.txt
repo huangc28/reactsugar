@@ -1,0 +1,14 @@
+import React, { Component } from 'react'
+import styles from './{name}Styles.css'
+
+class {name} extends Component {
+  render () {
+    return (
+      <div>
+        {/* start writing some react... */}
+      </div>
+    )
+  }
+}
+
+export default {name}

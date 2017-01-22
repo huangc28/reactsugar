@@ -1,0 +1,109 @@
+#!/usr/bin/env node
+
+/**
+ * reactsuger --name "Home" --path "./migme/"
+ *
+ * 1. If path is not specified, current path folder is used.
+ * 2. name will be used in following places:
+ *   - package.json
+ *   - [name].jsx
+ *   - [name]Styles.css
+ *
+ *
+ * @TODOs
+ *  - Extract file data to config file.
+ *  - Refactor - done.
+ *  - If directory already exists at the destinated folder / file. remove them first.
+ */
+
+const program = require('commander')
+const { resolve } = require('path')
+const {
+  exists,
+  mkdirSync,
+  writeFile,
+  readFileSync,
+} = require('fs')
+const remove = require('remove')
+const colors = require('colors')
+
+const CURRENT_PATH = process.cwd()
+
+/**
+ * @param {string} name
+ * @param {string} targetPath
+ * @param {object} option
+ * @param {mode}
+ */
+const FILE_CONFIGS = (name, targetPath) => ([
+  {
+    filename: 'package.json',
+    componentName: name, // Name of the react component that will replace the placeholder.
+    targetPath, // Destinated path the file will be created.
+    boilerplate: 'package.json.txt', // name of the boilerplate that will be used. all boilerplates need to be placed under boilerplates folder.
+  },
+  {
+    filename: `${name}.jsx`,
+    componentName: name,
+    targetPath,
+    boilerplate: 'component.txt'
+  },
+  { // If boilerplate attribute does not exist, don't replace
+    filename: `${name}Styles.css`,
+    targetPath,
+  }
+])
+
+/**
+ * @param {object} file
+ */
+const touchFile = file => {
+
+  let replacedBoilerplateString = ''
+
+  if (file.boilerplate && file.boilerplate !== '') {
+    const boilerplateString = readFileSync(
+      resolve(CURRENT_PATH, 'boilerplates', file.boilerplate),
+      'utf8'
+    )
+
+    replacedBoilerplateString = boilerplateString.replace(/\{name\}/g, file.componentName)
+  }
+
+  writeFile(`${file.targetPath}/${file.filename}`, replacedBoilerplateString, 'utf8', err => {
+    if (!err) {
+      console.log(`File ${file.targetPath}/${file.filename} has been created!`.green) // output green words!!
+
+      return
+    }
+
+    console.error(err, 1)
+  })
+}
+
+program
+  .arguments('<name>')
+  .option('-n, --name <name>', 'Name of the react component.')
+  .action((name, path) => { // @TODO should set a defualt argument for path
+    // create 3 files based on name and path:
+    //  1. package.json
+    //  2. [name].jsx
+    //  3. [name]Styles.css
+
+    const targetPath = `${CURRENT_PATH}/${name}`
+
+    exists(targetPath, exists => {
+      // if path exists, create files straight ahead
+      // if not, create directory first.
+
+      if (exists) {
+        remove.removeSync(targetPath)
+      }
+      mkdirSync(targetPath)
+
+      FILE_CONFIGS(name, targetPath).forEach(file => {
+        touchFile(file)
+      })
+    })
+  })
+  .parse(process.argv);

@@ -1,0 +1,12 @@
+import React from 'react'
+import styles from './{name}Styles.css'
+
+const {name} = () => {
+  return (
+    <div>
+      {/* Start writing some react... */}
+    </div>
+  )
+}
+
+export default {name}
