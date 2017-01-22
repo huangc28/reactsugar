@@ -89,7 +89,7 @@ program
   .version('1.0.0')
   .option('-n, --name <name>', 'Name of the react component.')
   .option('-p, --pure [pure]', 'Should component be a pure function or extends react component, default to extend default component.')
-  .action((name, pure) => { // @TODO should set a defualt argument for path
+  .action((name, options) => { // @TODO should set a defualt argument for path
     // create 3 files based on name and path:
     //  1. package.json
     //  2. [name].jsx
@@ -106,7 +106,7 @@ program
       }
       mkdirSync(targetPath)
 
-      FILE_CONFIGS(capitalizedName, targetPath, pure).forEach(file => {
+      FILE_CONFIGS(capitalizedName, targetPath, options.pure).forEach(file => {
         touchFile(file)
       })
     })
