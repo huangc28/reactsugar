@@ -28,6 +28,9 @@ const remove = require('remove')
 const colors = require('colors')
 
 const CURRENT_PATH = process.cwd()
+const BOILERPLATE_PATH = process.env.NODE_PATH
+  ? `${process.env.NODE_PATH}/react-suger/boilerplates`
+  : `${CURRENT_PATH}/boilerplates`
 
 /**
  * @param {string} name
@@ -65,7 +68,7 @@ const touchFile = file => {
 
   if (file.boilerplate && file.boilerplate !== '') {
     const boilerplateString = readFileSync(
-      resolve('./', 'boilerplates', file.boilerplate),
+      resolve(`${BOILERPLATE_PATH}`, file.boilerplate),
       'utf8'
     )
 
