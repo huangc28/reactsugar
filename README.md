@@ -19,6 +19,12 @@ Rather than manually creating three files each time we want to write a react com
 
 `npm install -g react-suger`
 
+and export your global node path as follow:
+
+`echo 'export NODE_PATH="'$(npm root -g)'"' >> ~/.bash_profile && . ~/.bash_profile` 
+
+if you don't export your `NODE_PATH` as global variable, reactsuger will try to find `boilerplates` folder in your local working directory.
+
 ## Usage
 
 `reactsuger home` ---> creates boilerplates under your current working directory.
