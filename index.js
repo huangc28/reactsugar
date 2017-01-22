@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * reactsuger --name "Home" --path "./migme/"
+ * reactsuger <name> [options]
  *
  * 1. If path is not specified, current path folder is used.
  * 2. name will be used in following places:
@@ -63,7 +63,6 @@ const FILE_CONFIGS = (name, targetPath, pure) => ([
  * @param {object} file
  */
 const touchFile = file => {
-
   let replacedBoilerplateString = ''
 
   if (file.boilerplate && file.boilerplate !== '') {
@@ -90,7 +89,6 @@ const touchFile = file => {
 program
   .arguments('<name>')
   .version('1.0.0')
-  .option('-n, --name <name>', 'Name of the react component.')
   .option('-p, --pure [pure]', 'Should component be a pure function or extends react component, default to extend default component.')
   .action((name, options) => { // @TODO should set a defualt argument for path
     // create 3 files based on name and path:
@@ -103,7 +101,6 @@ program
     exists(targetPath, exists => {
       // if path exists, create files straight ahead
       // if not, create directory first.
-
       if (exists) {
         remove.removeSync(targetPath)
       }
