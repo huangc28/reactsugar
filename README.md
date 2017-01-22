@@ -23,7 +23,7 @@ and export your global node path as follow:
 
 `echo 'export NODE_PATH="'$(npm root -g)'"' >> ~/.bash_profile && . ~/.bash_profile` 
 
-if you don't export your `NODE_PATH` as global variable, reactsuger will try to find `boilerplates` folder in your local working directory.
+if you don't export your `NODE_PATH` as global variable, reactsuger will try to find `boilerplates` folder in your current working directory.
 
 ## Usage
 
