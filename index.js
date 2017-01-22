@@ -106,7 +106,9 @@ program
       }
       mkdirSync(targetPath)
 
-      FILE_CONFIGS(name, targetPath, pure).forEach(file => {
+      const capitalizedName = `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+
+      FILE_CONFIGS(capitalizedName, targetPath, pure).forEach(file => {
         touchFile(file)
       })
     })
