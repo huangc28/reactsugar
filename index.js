@@ -65,7 +65,7 @@ const touchFile = file => {
 
   if (file.boilerplate && file.boilerplate !== '') {
     const boilerplateString = readFileSync(
-      resolve(CURRENT_PATH, 'boilerplates', file.boilerplate),
+      resolve('./', 'boilerplates', file.boilerplate),
       'utf8'
     )
 
