@@ -94,7 +94,8 @@ program
     //  1. package.json
     //  2. [name].jsx
     //  3. [name]Styles.css
-    const targetPath = resolve(CURRENT_PATH, name)
+    const capitalizedName = `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+    const targetPath = resolve(CURRENT_PATH, capitalizedName)
 
     exists(targetPath, exists => {
       // if path exists, create files straight ahead
@@ -104,8 +105,6 @@ program
         remove.removeSync(targetPath)
       }
       mkdirSync(targetPath)
-
-      const capitalizedName = `${name.charAt(0).toUpperCase()}${name.slice(1)}`
 
       FILE_CONFIGS(capitalizedName, targetPath, pure).forEach(file => {
         touchFile(file)
