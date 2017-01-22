@@ -84,8 +84,6 @@ const touchFile = file => {
   })
 }
 
-let pureCmdValue
-
 program
   .arguments('<name>')
   .version('1.0.0')
