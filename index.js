@@ -80,6 +80,7 @@ const touchFile = file => {
     }
 
     console.error(err, 1)
+    process.exit(1)
   })
 }
 
