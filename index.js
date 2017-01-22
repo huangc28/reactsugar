@@ -32,10 +32,10 @@ const CURRENT_PATH = process.cwd()
 /**
  * @param {string} name
  * @param {string} targetPath
- * @param {object} option
+ * @param {bool} pure
  * @param {mode}
  */
-const FILE_CONFIGS = (name, targetPath) => ([
+const FILE_CONFIGS = (name, targetPath, pure) => ([
   {
     filename: 'package.json',
     componentName: name, // Name of the react component that will replace the placeholder.
@@ -46,7 +46,9 @@ const FILE_CONFIGS = (name, targetPath) => ([
     filename: `${name}.jsx`,
     componentName: name,
     targetPath,
-    boilerplate: 'component.txt'
+    boilerplate: pure
+      ? 'pureFunctionComponent.txt'
+      : 'component.txt',
   },
   { // If boilerplate attribute does not exist, don't replace
     filename: `${name}Styles.css`,
@@ -81,15 +83,17 @@ const touchFile = file => {
   })
 }
 
+let pureCmdValue
+
 program
   .arguments('<name>')
   .option('-n, --name <name>', 'Name of the react component.')
-  .action((name, path) => { // @TODO should set a defualt argument for path
+  .option('-p, --pure [pure]', 'Should component be a pure function or extends react component, default to extend default component.')
+  .action((name, pure) => { // @TODO should set a defualt argument for path
     // create 3 files based on name and path:
     //  1. package.json
     //  2. [name].jsx
     //  3. [name]Styles.css
-
     const targetPath = `${CURRENT_PATH}/${name}`
 
     exists(targetPath, exists => {
@@ -101,7 +105,7 @@ program
       }
       mkdirSync(targetPath)
 
-      FILE_CONFIGS(name, targetPath).forEach(file => {
+      FILE_CONFIGS(name, targetPath, pure).forEach(file => {
         touchFile(file)
       })
     })
