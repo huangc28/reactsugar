@@ -54,7 +54,7 @@ const FILE_CONFIGS = (name, targetPath, pure) => ([
       : 'component.txt',
   },
   { // If boilerplate attribute does not exist, don't replace
-    filename: `${name}Styles.css`,
+    filename: `${name}.css`,
     targetPath,
   }
 ])
