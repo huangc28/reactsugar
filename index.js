@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * reactsuger <name> [options]
+ * reactsugar <name> [options]
  *
  * 1. If path is not specified, current path folder is used.
  * 2. name will be used in following places:
@@ -29,7 +29,7 @@ const colors = require('colors')
 
 const CURRENT_PATH = process.cwd()
 const BOILERPLATE_PATH = process.env.NODE_PATH
-  ? `${process.env.NODE_PATH}/react-suger/boilerplates`
+  ? `${process.env.NODE_PATH}/react-sugar/boilerplates`
   : `${CURRENT_PATH}/boilerplates`
 
 /**

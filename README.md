@@ -1,4 +1,4 @@
-# reactsuger
+# reactsugar
 Creates the boilerplates for react component stacks
 
 ## Compatible
@@ -17,19 +17,19 @@ Rather than manually creating three files each time we want to write a react com
 
 ## Install
 
-`npm install -g react-suger`
+`npm install -g react-sugar`
 
 and export your global node path as follow:
 
 `echo 'export NODE_PATH="'$(npm root -g)'"' >> ~/.bash_profile && . ~/.bash_profile` 
 
-if you don't export your `NODE_PATH` as global variable, reactsuger will try to find `boilerplates` folder in your current working directory.
+if you don't export your `NODE_PATH` as global variable, reactsugar will try to find `boilerplates` folder in your current working directory.
 
 ## Usage
 
-`reactsuger home` ---> creates boilerplates under your current working directory.
+`reactsugar home` ---> creates boilerplates under your current working directory.
 
 ### Pure function component
 
-`reactsuger -p home` ---> does the same as the above, just that the component is now in pure function.
+`reactsugar -p home` ---> does the same as the above, just that the component is now in pure function.
 
