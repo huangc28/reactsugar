@@ -1,6 +1,6 @@
 {
   "name": "react-suger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Create boilerplates for react component stacks.",
   "bin": {
     "reactsuger": "./index.js"
