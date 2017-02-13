@@ -31,5 +31,5 @@ if you don't export your `NODE_PATH` as global variable, reactsugar will try to 
 
 ### Pure function component
 
-`reactsugar -p home` ---> does the same as the above, just that the component is now in pure function.
+`reactsugar home -p` ---> does the same as the above, just that the component is now in pure function.
 
