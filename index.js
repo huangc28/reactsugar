@@ -100,42 +100,20 @@ program
     const capitalizedName = `${name.charAt(0).toUpperCase()}${name.slice(1)}`
     const targetPath = resolve(CURRENT_PATH, dir, capitalizedName)
 
-    if (dir === '') {
-      exists(targetPath, exists => {
-        // if path exists, create files straight ahead
-        // if not, create directory first.
-        // if name is in a pattern of "./a", create a straight ahead.
-        // check if name already exists
-        if (exists) {
-          remove.removeSync(targetPath)
-        }
-
-        mkdirSync(targetPath)
-
-        FILE_CONFIGS(capitalizedName, targetPath, options.pure).forEach(file => {
-          touchFile(file)
-        })
-      })
-
-      return
+    if (dir !== '') {
+      mkdirp.sync(dir)
     }
 
     // if name is in a pattern of "./a/b/c"
-    mkdirp(dir, err => {
-      if (err) {
-        console.log('mkdirp error', err)
+    exists(targetPath, exists => {
+      if (exists) {
+        remove.removeSync(targetPath)
       }
 
-      exists(targetPath, exists => {
-        if (exists) {
-          remove.removeSync(targetPath)
-        }
+      mkdirSync(targetPath)
 
-        mkdirSync(targetPath)
-
-        FILE_CONFIGS(capitalizedName, targetPath, options.pure).forEach(file => {
-          touchFile(file)
-        })
+      FILE_CONFIGS(capitalizedName, targetPath, options.pure).forEach(file => {
+        touchFile(file)
       })
     })
   })
