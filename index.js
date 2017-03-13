@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * reactsugar <name> [options]
+ * reactsugar -p <name> [options]
  *
  * 1. If path is not specified, current path folder is used.
  * 2. name will be used in following places:
@@ -17,13 +17,14 @@
  */
 
 const program = require('commander')
-const { resolve } = require('path')
+const { resolve, parse } = require('path')
 const {
   exists,
   mkdirSync,
   writeFile,
   readFileSync,
 } = require('fs')
+const mkdirp = require('mkdirp')
 const remove = require('remove')
 const colors = require('colors')
 
@@ -87,27 +88,54 @@ const touchFile = file => {
 }
 
 program
-  .arguments('<name>')
-  .version('1.0.0')
+  .arguments('<filename>')
+  .version('1.1.0')
   .option('-p, --pure [pure]', 'Should component be a pure function or extends react component, default to extend default component.')
-  .action((name, options) => { // @TODO should set a defualt argument for path
+  .action((filename, options) => { // @TODO should set a defualt argument for path
     // create 3 files based on name and path:
     //  1. package.json
     //  2. [name].jsx
     //  3. [name]Styles.css
+    const { dir, name } = parse(filename)
     const capitalizedName = `${name.charAt(0).toUpperCase()}${name.slice(1)}`
-    const targetPath = resolve(CURRENT_PATH, capitalizedName)
+    const targetPath = resolve(CURRENT_PATH, dir, capitalizedName)
 
-    exists(targetPath, exists => {
-      // if path exists, create files straight ahead
-      // if not, create directory first.
-      if (exists) {
-        remove.removeSync(targetPath)
+    if (dir === '') {
+      exists(targetPath, exists => {
+        // if path exists, create files straight ahead
+        // if not, create directory first.
+        // if name is in a pattern of "./a", create a straight ahead.
+        // check if name already exists
+        if (exists) {
+          remove.removeSync(targetPath)
+        }
+
+        mkdirSync(targetPath)
+
+        FILE_CONFIGS(capitalizedName, targetPath, options.pure).forEach(file => {
+          touchFile(file)
+        })
+      })
+
+      return
+    }
+
+    // if name is in a pattern of "./a/b/c"
+    mkdirp(dir, err => {
+      if (err) {
+        console.log('mkdirp error', err)
       }
-      mkdirSync(targetPath)
 
-      FILE_CONFIGS(capitalizedName, targetPath, options.pure).forEach(file => {
-        touchFile(file)
+      exists(targetPath, exists => {
+        if (exists) {
+          remove.removeSync(targetPath)
+        }
+
+        mkdirSync(targetPath)
+
+        FILE_CONFIGS(capitalizedName, targetPath, options.pure).forEach(file => {
+          touchFile(file)
+        })
       })
     })
   })

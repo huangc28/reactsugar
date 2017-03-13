@@ -1,6 +1,6 @@
 {
   "name": "react-sugar",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Create boilerplates for react component stacks.",
   "bin": {
     "reactsugar": "./index.js"
@@ -11,6 +11,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "mkdirp": "^0.5.1",
     "remove": "^0.1.5"
   }
 }
