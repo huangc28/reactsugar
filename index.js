@@ -91,7 +91,7 @@ const touchFile = file => {
 }
 
 program
-  .version('1.1.1')
+  .version('1.1.2')
   .command('create <filename>')
   .option('-p, --pure', 'Should component be a pure function or extends react component, default to extend default component.')
   .action((filename, options) => { // @TODO should set a defualt argument for path
