@@ -16,6 +16,8 @@
  *  - If directory already exists at the destinated folder / file. remove them first - done.
  */
 
+'use strict'
+
 const program = require('commander')
 const { resolve, parse } = require('path')
 const {
