@@ -27,9 +27,10 @@ if you don't export your `NODE_PATH` as global variable, reactsugar will try to 
 
 ## Usage
 
-`reactsugar home` ---> creates boilerplates under your current working directory.
+`reactsugar create home` ---> creates boilerplates under your current working directory.
 
 ### Pure function component
 
-`reactsugar home -p` ---> does the same as the above, just that the component is now in pure function.
+`reactsugar create home -p` ---> does the same as the above, just that the component is now in pure function.
 
+## 
