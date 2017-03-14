@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
 /**
- * reactsugar -p <name> [options]
+ * reactsugar create <name> [options]
+ *  options:
+ *    1. -p, --pure
  *
  * 1. If path is not specified, current path folder is used.
  * 2. name will be used in following places:
  *   - package.json
  *   - [name].jsx
  *   - [name]Styles.css
- *
  *
  * @TODOs
  *  - Extract file data to config file.
@@ -90,9 +91,9 @@ const touchFile = file => {
 }
 
 program
-  .arguments('<filename>')
-  .version('1.1.0')
-  .option('-p, --pure [pure]', 'Should component be a pure function or extends react component, default to extend default component.')
+  .version('1.1.1')
+  .command('create <filename>')
+  .option('-p, --pure', 'Should component be a pure function or extends react component, default to extend default component.')
   .action((filename, options) => { // @TODO should set a defualt argument for path
     // create 3 files based on name and path:
     //  1. package.json
@@ -119,4 +120,5 @@ program
       })
     })
   })
-  .parse(process.argv);
+
+  program.parse(process.argv)
